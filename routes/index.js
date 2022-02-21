@@ -9,11 +9,11 @@ const router=express.Router()
 
 
  router.route('/').get((req,res)=>{
-
+ res.send('<h1>welcome to this home </h1>')
  })
  const appkey=process.env.API_KEY
 
- let city='new york'
+ let city='london'
  axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appkey}`)
  .then(response=> {
     const temp=response.data.main.temp
