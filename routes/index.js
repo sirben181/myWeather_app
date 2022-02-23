@@ -29,6 +29,7 @@ const router=express.Router()
     const weather=({
         name,
         temp,
+        pressure,
         coord,
         humidity,
         wind,

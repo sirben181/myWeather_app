@@ -16,15 +16,18 @@ const fetchWeather=async()=>{
     const displayData={
         city:data.name,
         temp:kelvinToCelsius(data.temp),
+        humidity:data.humidity,
         lat:data.coord.lat,
         lon:data.coord.lon,
-        visibility:data.visibility,
+        visibility:convertToKm(data.visibility),
         windspeed:data.wind.speed,
+        deg:directionMaker(data.wind.deg),
         sunrise:(data.sunrise),
-        sunset:data.sunset
+        sunset:data.sunset,
+        pressure:data.pressure
 
     }
-    console.log(data.sunrise)
+    console.log(data.pressure)
 
     AddData(displayData)
 }
@@ -32,12 +35,23 @@ fetchWeather()
 const AddData=(data)=>{
 results.innerHTML=`
 <h1>The weather in ${data.city} of lat ${data.lat}& long ${data.lon} is: </h1>
-<p>Temperature is ${data.temp}&deg;C </p>
-<p>with a visibility of ${data.visibility}</p>
+<p>Temperature is ${data.temp}&deg;C </p> 
+<p>Humidity of ${data.humidity} %</p>
+<p>and pressure of ${data.pressure}hpa </p>
+<p>with a visibility of ${data.visibility} km</p>
 <p>wind speed is ${data.windspeed} miles/hr</p>
+<p>flowing from ${data.deg} </p>
 `
 }
 const kelvinToCelsius =(temp)=>{
     return Math.ceil((temp-273.15))
 
+}
+const convertToKm=(visibility)=>{
+ return Math.ceil((visibility/1000))
+}
+const directionMaker=(deg)=>{
+ if(deg===220){
+   return  deg= 'Sw'
+ }
 }
