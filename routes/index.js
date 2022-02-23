@@ -6,13 +6,16 @@ dotenv.config({path:'./config/config.env'})
 
 
 const router=express.Router()
-
+let city=''
 
  router.route('/').get()
+ router.route('/posts').post((req,res)=>{
+ console.log(res)
+ })
  
  const appkey=process.env.API_KEY
 
- let city='chuka'
+  city='nairobi'
  axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appkey}`)
  .then(response=> {
      const name=response.data.name

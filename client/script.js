@@ -1,15 +1,20 @@
+// const { default: axios } = require("axios")
 
 const city=document.querySelector('.city')
 const results=document.querySelector('.results')
-const btn=document.querySelector('.btn')
-btn.addEventListener('click',(e)=>{
-e.preventDefault()
-city.target.value;
-console.log(city.target.value)
-
+// const btn=document.querySelector('.btn')
+const input=document.querySelector('form')
+input.addEventListener('submit',(e)=>{
+ e.preventDefault()
+ 
+ sendCity(city.input)
+ city.input=''
 })
+const sendCity=()=>{
+axios.post('http://localhost:5000/posts')
+}
+ // this is fetching the weather from the backend
 const fetchWeather=async()=>{
-
     const res=await fetch('http://localhost:5000/posts')
     const data=await res.json()
     
@@ -27,11 +32,12 @@ const fetchWeather=async()=>{
         pressure:data.pressure
 
     }
-    console.log(data.wind.deg)
+    // console.log(data.wind.deg)
 
     AddData(displayData)
 }
 fetchWeather()
+// adding data to the dom
 const AddData=(data)=>{
 results.innerHTML=`
 <h1>The weather in ${data.city} of lat ${data.lat}&deg; & long ${data.lon}&deg; is: </h1>
@@ -43,13 +49,16 @@ results.innerHTML=`
 <p>flowing from ${data.deg} </p>
 `
 }
+//converting to deg celsius
 const kelvinToCelsius =(temp)=>{
     return Math.ceil((temp-273.15))
 
 }
+// converting into km
 const convertToKm=(visibility)=>{
  return Math.ceil((visibility/1000))
 }
+// getting the direction from the degrees
 const directionMaker=(deg)=>{
  
   if(deg===180){
