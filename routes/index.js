@@ -12,7 +12,7 @@ const router=express.Router()
  
  const appkey=process.env.API_KEY
 
- let city='london'
+ let city='chuka'
  axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appkey}`)
  .then(response=> {
      const name=response.data.name

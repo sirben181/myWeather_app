@@ -27,19 +27,19 @@ const fetchWeather=async()=>{
         pressure:data.pressure
 
     }
-    console.log(data.pressure)
+    console.log(data.wind.deg)
 
     AddData(displayData)
 }
 fetchWeather()
 const AddData=(data)=>{
 results.innerHTML=`
-<h1>The weather in ${data.city} of lat ${data.lat}& long ${data.lon} is: </h1>
+<h1>The weather in ${data.city} of lat ${data.lat}&deg; & long ${data.lon}&deg; is: </h1>
 <p>Temperature is ${data.temp}&deg;C </p> 
 <p>Humidity of ${data.humidity} %</p>
 <p>and pressure of ${data.pressure}hpa </p>
 <p>with a visibility of ${data.visibility} km</p>
-<p>wind speed is ${data.windspeed} miles/hr</p>
+<p>wind speed is ${data.windspeed} m/s</p>
 <p>flowing from ${data.deg} </p>
 `
 }
@@ -51,7 +51,21 @@ const convertToKm=(visibility)=>{
  return Math.ceil((visibility/1000))
 }
 const directionMaker=(deg)=>{
- if(deg===220){
-   return  deg= 'Sw'
- }
+ 
+  if(deg===180){
+     return deg= 'S'
+ }else if(deg===0){
+     return deg='N'
+ }else if( deg===270){
+     return deg='W'
+ }else if(deg===90){
+     return deg='E'
+ }else if(deg <90  && deg> 0){return deg='NE'}
+ else if(deg>90 && deg <180){
+     return deg='SE'
+ }else if(deg> 180 && deg< 270){
+     return deg='SW'
+ }else if( deg> 270){
+     return deg='NW'
+ } else{ return}
 }
