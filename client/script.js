@@ -6,12 +6,11 @@ const results=document.querySelector('.results')
 const input=document.querySelector('form')
 input.addEventListener('submit',(e)=>{
  e.preventDefault()
- 
- sendCity(city.input)
- city.input=''
+  sendCity(city.value)
+ city.value=''
 })
-const sendCity=()=>{
-axios.post('http://localhost:5000/posts')
+const sendCity= async()=>{
+console.log(city.value)
 }
  // this is fetching the weather from the backend
 const fetchWeather=async()=>{
@@ -60,8 +59,7 @@ const convertToKm=(visibility)=>{
 }
 // getting the direction from the degrees
 const directionMaker=(deg)=>{
- 
-  if(deg===180){
+   if(deg===180){
      return deg= 'S'
  }else if(deg===0){
      return deg='N'
@@ -69,7 +67,8 @@ const directionMaker=(deg)=>{
      return deg='W'
  }else if(deg===90){
      return deg='E'
- }else if(deg <90  && deg> 0){return deg='NE'}
+ }else if(deg <90  && deg> 0)
+ {return deg='NE'}
  else if(deg>90 && deg <180){
      return deg='SE'
  }else if(deg> 180 && deg< 270){

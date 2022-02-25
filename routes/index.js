@@ -15,7 +15,7 @@ let city=''
  
  const appkey=process.env.API_KEY
 
-  city='nairobi'
+  city='nanyuki'
  axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appkey}`)
  .then(response=> {
      const name=response.data.name
